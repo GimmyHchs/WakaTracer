@@ -32,6 +32,6 @@ class CreateProtomissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mission_prototypes');
+        Schema::dropIfExists('protomissions');
     }
 }
