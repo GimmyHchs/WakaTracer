@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // 各自建立基本Prototype資料，最後藉由InitPrototypes連結關聯
+        $this->call(ProtomissionTableSeeder::class);
+        $this->call(ProtolevelTableSeeder::class);
+        $this->call(ProtolanguageTableSeeder::class);
+        $this->call(InitPrototypes::class);
     }
 }

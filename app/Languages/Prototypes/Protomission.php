@@ -15,15 +15,19 @@ class Protomission extends Model
         'name',
         'display_name',
     ];
+
     /*------------------------------------------------------------------------**
     ** Relation 定義                                                          **
     **------------------------------------------------------------------------*/
     public function protolanguages()
     {
-        return $this->belongsToMany(Protolanguage::class);
+        return $this->belongsToMany(Protolanguage::class)->withTimestamps();
     }
-    public function protolevels()
+    public function protolevel()
     {
         return $this->belongsTo(Protolevel::class);
     }
+    /*------------------------------------------------------------------------**
+    ** Method 定義                                                            **
+    **------------------------------------------------------------------------*/
 }

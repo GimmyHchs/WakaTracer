@@ -21,12 +21,25 @@ class Protolanguage extends Model
     **------------------------------------------------------------------------*/
     public function protolevels()
     {
-        return $this->belongsToMany(Protolevel::class);
+        return $this->belongsToMany(Protolevel::class)->withTimestamps();;
     }
 
     public function protomissions()
     {
-        return $this->belongsToMany(Protomission::class);
+        return $this->belongsToMany(Protomission::class)->withTimestamps();;
+    }
+
+
+    /*------------------------------------------------------------------------**
+    ** Method 定義                                                            **
+    **------------------------------------------------------------------------*/
+    public function attachProtolevel(Protolevel $level)
+    {
+        return $this->protolevels()->attach($level);
+    }
+    public function attachProtomission(Protomission $mission)
+    {
+        return $this->protomissions()->attach($mission);
     }
 
 }
