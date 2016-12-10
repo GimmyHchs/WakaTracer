@@ -28,6 +28,6 @@ class CreateProtolevelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('level_prototypes');
+        Schema::dropIfExists('protolevels');
     }
 }

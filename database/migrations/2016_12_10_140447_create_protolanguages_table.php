@@ -28,6 +28,6 @@ class CreateProtolanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('language_prototypes');
+        Schema::dropIfExists('protolanguages');
     }
 }

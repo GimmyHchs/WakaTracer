@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProtomissionsTable extends Migration
+class CreateProtolanguageProtolevelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateProtomissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('protomissions', function (Blueprint $table) {
+        Schema::create('protolanguage_protolevel', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('protolevel_id')->unsigned()->nullable();
-            $table->string('name')->comment('名稱');
-            $table->string('display_name')->comment('顯示名稱');
+            $table->integer('protolanguage_id')->unsigned()->index();
+            $table->integer('protolevel_id')->unsigned()->index();
             $table->timestamps();
 
             //foreign Key Set
+            $table->foreign('protolanguage_id')->references('id')->on('protolanguages');
             $table->foreign('protolevel_id')->references('id')->on('protolevels');
         });
     }
@@ -32,6 +32,6 @@ class CreateProtomissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('protomissions');
+        Schema::dropIfExists('protolanguage_protolevel');
     }
 }
