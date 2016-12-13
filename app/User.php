@@ -31,7 +31,7 @@ class User extends Authenticatable
     //
     public function languages()
     {
-      return $this->hasMany(Language::class)->withTimestamps;
+      return $this->hasMany(Language::class);
     }
 
 

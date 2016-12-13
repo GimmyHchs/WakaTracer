@@ -15,7 +15,13 @@ class CreateLevelMissionTable extends Migration
     {
         Schema::create('level_mission', function (Blueprint $table) {
             $table->increments('id');
+            $tabel->integer('level_id')->unsigned()->index();
+            $tabel->integer('mission_id')->unsigned()->index();
             $table->timestamps();
+
+            //foreign key Set
+            $table->foreign('level_id')->references('id')->on('levels');
+            $table->foreign('mission_id')->references('id')->on('missions');
         });
     }
 

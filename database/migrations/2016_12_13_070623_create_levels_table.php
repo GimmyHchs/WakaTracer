@@ -15,7 +15,13 @@ class CreateLevelsTable extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('language_id')->unsigned()->nullable();
+            $table->string('name')->comment('名稱');
+            $table->string('display_name')->comment('顯示名稱');
             $table->timestamps();
+
+            //foreign ket Set
+            $table->foreign('language_id')->references('id')->on('languages') ;
         });
     }
 
