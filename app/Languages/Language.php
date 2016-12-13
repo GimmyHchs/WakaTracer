@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Languages;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Language extends Model
+{
+    //
+    public function user()
+    {
+      return $this->belongsTo(User::class);
+    }
+    //
+    public function level()
+    {
+      return $this->hasMany(Level::class);
+    }
+}

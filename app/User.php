@@ -26,4 +26,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    //
+    // relationship
+    //
+    public function languages()
+    {
+      return $this->hasMany(Language::class)->withTimestamps;
+    }
+
+
 }
