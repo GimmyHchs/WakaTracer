@@ -21,7 +21,7 @@ class CreateLevelsTable extends Migration
             $table->timestamps();
 
             //foreign ket Set
-            $table->foreign('language_id')->references('id')->on('languages') ;
+            $table->foreign('language_id')->references('id')->on('languages');
         });
     }
 

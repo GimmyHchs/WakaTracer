@@ -1,21 +1,21 @@
 <?php
 
-namespace Tests\units\eloquents\prototypes;
+namespace Tests\units\eloquents;
 
 use Tests\TestCase;
-use App\Languages\Prototypes\Protolevel;
-use App\Languages\Prototypes\Protolanguage;
-use App\Languages\Prototypes\Protomission;
+use App\Languages\Language;
+use App\Languages\Level;
+use App\Languages\Mission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ProtolevelTest extends TestCase
+class LevelTest extends TestCase
 {
     use DatabaseMigrations;
     use DatabaseTransactions;
 
     /**
-     * 產生Protolevel.
+     * 產生Level.
      *
      * @group unit
      * @group language
@@ -25,7 +25,7 @@ class ProtolevelTest extends TestCase
     {
         $this->printTestStartMessage(__FUNCTION__);
 
-        $level = Protolevel::create([
+        $level = Level::create([
             'name' => 'beginer',
             'display_name' => 'Beginer'
         ]);
@@ -35,52 +35,54 @@ class ProtolevelTest extends TestCase
     }
 
     /**
-     * 與Languages建立多對多關聯.
+     * 與Languae建立關聯.
      *
      * @group unit
      * @group language
      * @group prototype
      */
-    public function testCanAttachLanguage()
+    public function testCanRelationLanguage()
     {
         $this->printTestStartMessage(__FUNCTION__);
-
-        $language = Protolanguage::create([
+        $language = Language::create([
             'name' => 'php',
             'display_name' => 'PHP'
         ]);
-        $level = Protolevel::create([
+        $level = Level::create([
             'name' => 'beginer',
             'display_name' => 'Beginer'
         ]);
+        $level->language()->associate($language)->save();
 
-        $level->attachProtolanguage($language);
-
-        $this->assertEquals($language->protolevels->first()->name, 'beginer');
-        $this->assertEquals($level->protolanguages->first()->name, 'php');
+        $target = $level->language()->first();
+        $this->assertEquals($target->name, $language->name);
+        $this->assertEquals(1, count($level->language));
     }
 
     /**
-     * 與Mission建立1對多關聯.
+     * 與Mission建立關聯.
      *
      * @group unit
      * @group language
      * @group prototype
      */
-    public function testCanAddMission()
+    public function testCanRelationMission()
     {
         $this->printTestStartMessage(__FUNCTION__);
-
-        $mission = Protomission::create([
+        $mission = Mission::create([
             'name' => 'hello_world',
-            'display_name' => 'Hello World!!'
+            'display_name' => 'Hello World'
         ]);
-        $level = Protolevel::create([
+        $level = Level::create([
             'name' => 'beginer',
             'display_name' => 'Beginer'
         ]);
+        $level->missions()->save($mission)->save();
 
-        $level->addProtomission($mission);
-        $this->assertEquals($mission->fresh()->protolevel->name, 'beginer');
+        $target = $level->missions()->first();
+        $this->assertEquals($target->name, $mission->name);
+        $this->assertEquals(1, count($level->missions));
     }
+
+
 }

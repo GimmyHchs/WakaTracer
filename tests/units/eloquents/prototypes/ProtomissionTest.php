@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\units\models;
+namespace Tests\units\eloquents\prototypes;
 
 use Tests\TestCase;
 use App\Languages\Prototypes\Protolevel;

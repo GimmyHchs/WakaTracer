@@ -9,17 +9,17 @@ class Mission extends Model
     /*------------------------------------------------------------------------**
     ** Entity 定義
     **------------------------------------------------------------------------*/
-    protected $table = 'missions' ;
+    protected $table = 'missions';
     protected $fillable = [
        'name',
        'display_name'
-    ] ;
+    ];
     /*------------------------------------------------------------------------**
     ** Relation 定義
     **------------------------------------------------------------------------*/
-    // Many Missions to many levels
+    // Mission belongsTo Level
     public function level()
     {
-      return $this->belongsToMany(Level::class)->withTimestamps;
+      return $this->belongsTo(Level::class);
     }
 }
