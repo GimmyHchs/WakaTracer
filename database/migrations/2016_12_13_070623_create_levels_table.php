@@ -18,6 +18,7 @@ class CreateLevelsTable extends Migration
             $table->integer('language_id')->unsigned()->nullable();
             $table->string('name')->comment('名稱');
             $table->string('display_name')->comment('顯示名稱');
+            $table->text('description')->nullable()->comment('描述');
             $table->timestamps();
 
             //foreign ket Set

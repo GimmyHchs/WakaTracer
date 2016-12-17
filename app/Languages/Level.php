@@ -12,7 +12,8 @@ class Level extends Model
     protected $table = 'levels';
     protected $fillable = [
        'name',
-       'display_name'
+       'display_name',
+       'description',
     ];
     /*------------------------------------------------------------------------**
     ** Relation 定義

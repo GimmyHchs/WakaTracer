@@ -15,6 +15,7 @@ class Language extends Model
        'name',
        'user_id',
        'display_name'
+       'description',
     ];
     /*------------------------------------------------------------------------**
     ** Relation定義
