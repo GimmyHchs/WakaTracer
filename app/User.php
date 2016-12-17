@@ -35,5 +35,11 @@ class User extends Authenticatable
       return $this->hasMany(Language::class);
     }
 
-
+    /*------------------------------------------------------------------------**
+    ** Functions
+    **------------------------------------------------------------------------*/
+    public function addLanguage(Language $language)
+    {
+        return $this->languages()->save($language);
+    }
 }

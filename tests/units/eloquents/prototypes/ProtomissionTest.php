@@ -33,4 +33,23 @@ class ProtomissionTest extends TestCase
         $this->assertEquals($mission->name, 'hello_world');
         $this->assertEquals($mission->display_name, 'Hello World');
     }
+    /**
+     * 產生Protomission.
+     *
+     * @group unit
+     * @group language
+     * @group prototype
+     */
+    public function testCanFactory()
+    {
+        $this->printTestStartMessage(__FUNCTION__);
+
+        $mission = factory(Protomission::class)->create([
+            'name' => 'hello_world',
+            'display_name' => 'Hello World'
+        ]);
+
+        $this->assertEquals($mission->name, 'hello_world');
+        $this->assertEquals($mission->display_name, 'Hello World');
+    }
 }

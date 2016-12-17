@@ -43,17 +43,32 @@ class InitLanguages
     public function initCompleted(Protolanguage $proto_language)
     {
         $this->userCheck(__LINE__);
-
+        $this->initLanguage($proto_language);
         // 以下沒做完
-        foreach ($proto_language->levels as $level) {
-            $this->user->addLevel()
-        }
+        // foreach ($proto_language->levels as $level) {
+        //     $this->user->addLevel();
+        // }
     }
 
 
-    public function InitLanguage(Protolanguage $proto_language)
+    /**
+     * 單獨實體化一個Protolanguage
+     * 並關聯於User
+     */
+    public function initLanguage(Protolanguage $proto_language)
     {
-        // 沒做完
+        $this->userCheck(__LINE__);
+
+        if($this->checkLanguage($proto_language)){
+            return;
+        }else {
+            $language = Language::create([
+                'name' => $proto_language->name,
+                'display_name' => $proto_language->display_name,
+                'description' => $proto_language->description,
+            ]);
+            $this->user->addLanguage($language);
+        }
     }
 
     /*------------------------------------------------------------------------**
@@ -67,6 +82,23 @@ class InitLanguages
     {
         if(!($this->user instanceof User))
             throw new InitialException("User didn't set", InitLanguages::class, $line);
+    }
+
+    /**
+     * 確認User是不是已經擁有某個Language
+     */
+    private function checkLanguage(Protolanguage $proto_language)
+    {
+        $result = $this->user
+             ->languages()
+             ->where('name', $proto_language->name)
+             ->first();
+
+        if(!empty($result)){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

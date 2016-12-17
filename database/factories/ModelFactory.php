@@ -22,3 +22,25 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Languages\Prototypes\Protolanguage::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'display_name' => $faker->word,
+        'description' => $faker->realText(rand(10,20)),
+    ];
+});
+$factory->define(App\Languages\Prototypes\Protolevel::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'display_name' => $faker->word,
+        'description' => $faker->realText(rand(10,20)),
+    ];
+});
+$factory->define(App\Languages\Prototypes\Protomission::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'display_name' => $faker->word,
+        'description' => $faker->realText(rand(10,20)),
+    ];
+});
