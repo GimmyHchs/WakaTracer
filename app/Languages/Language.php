@@ -3,17 +3,19 @@
 namespace App\Languages;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Language extends Model
 {
     /*------------------------------------------------------------------------**
     ** Entity 定義
     **------------------------------------------------------------------------*/
-    protected $table = 'languages' ;
+    protected $table = 'languages';
     protected $fillable = [
        'name',
+       'user_id',
        'display_name'
-    ] ;
+    ];
     /*------------------------------------------------------------------------**
     ** Relation定義
     **------------------------------------------------------------------------*/
@@ -22,7 +24,7 @@ class Language extends Model
       return $this->belongsTo(User::class);
     }
     //
-    public function level()
+    public function levels()
     {
       return $this->hasMany(Level::class);
     }

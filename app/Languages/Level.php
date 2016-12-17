@@ -9,11 +9,11 @@ class Level extends Model
     /*------------------------------------------------------------------------**
     ** Entity 定義
     **------------------------------------------------------------------------*/
-    protected $table = 'levels' ;
+    protected $table = 'levels';
     protected $fillable = [
        'name',
        'display_name'
-    ] ;
+    ];
     /*------------------------------------------------------------------------**
     ** Relation 定義
     **------------------------------------------------------------------------*/
@@ -22,9 +22,9 @@ class Level extends Model
     {
       return $this->belongsTo(Language::class);
     }
-    // Many languages to  many missions
-    public function mission()
+    // One language to  many missions
+    public function missions()
     {
-      return $this->belongsToMany(Mission::class)->withTimestamps;
+      return $this->hasMany(Mission::class);
     }
 }
