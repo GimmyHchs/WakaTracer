@@ -37,7 +37,7 @@ class InitLanguages
     }
 
     /**
-     * 初始化某個Language下所有的 Level 以及 Mission
+     * 實體化某個Language下所有的 Level 以及 Mission
      * 並關聯於User
      */
     public function initCompleted(Protolanguage $proto_language)
