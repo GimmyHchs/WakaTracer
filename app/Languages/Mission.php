@@ -2,7 +2,7 @@
 
 namespace App\Languages;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\LanguageEloquent as Model;
 
 class Mission extends Model
 {
@@ -12,7 +12,8 @@ class Mission extends Model
     protected $table = 'missions';
     protected $fillable = [
        'name',
-       'display_name'
+       'display_name',
+       'description',
     ];
     /*------------------------------------------------------------------------**
     ** Relation 定義

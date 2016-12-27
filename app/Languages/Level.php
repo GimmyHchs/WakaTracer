@@ -2,7 +2,7 @@
 
 namespace App\Languages;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\LanguageEloquent as Model;
 
 class Level extends Model
 {
@@ -12,7 +12,8 @@ class Level extends Model
     protected $table = 'levels';
     protected $fillable = [
        'name',
-       'display_name'
+       'display_name',
+       'description',
     ];
     /*------------------------------------------------------------------------**
     ** Relation 定義
@@ -26,5 +27,13 @@ class Level extends Model
     public function missions()
     {
       return $this->hasMany(Mission::class);
+    }
+
+    /*------------------------------------------------------------------------**
+    ** Functions
+    **------------------------------------------------------------------------*/
+    public function addMission(Mission $mission)
+    {
+        return $this->missions()->save($mission);
     }
 }

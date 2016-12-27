@@ -14,6 +14,7 @@ class Protolevel extends Model
     protected $fillable = [
         'name',
         'display_name',
+        'description',
     ];
     /*------------------------------------------------------------------------**
     ** Relation 定義                                                          **
@@ -34,8 +35,16 @@ class Protolevel extends Model
     {
         return $this->protolanguages()->attach($language);
     }
+    public function hasProtolanguage(Protolanguage $language)
+    {
+        return $this->protolanguages->contains($language);
+    }
     public function addProtomission(Protomission $mission)
     {
         return $this->protomissions()->save($mission);
+    }
+    public function hasProtomission(Protomission $mission)
+    {
+        return $this->protomissions->contains($mission);
     }
 }

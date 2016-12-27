@@ -33,6 +33,25 @@ class ProtolevelTest extends TestCase
         $this->assertEquals($level->name, 'beginer');
         $this->assertEquals($level->display_name, 'Beginer');
     }
+    /**
+     * 產生Protolevel
+     *
+     * @group unit
+     * @group language
+     * @group prototype
+     */
+    public function testCanFactory()
+    {
+        $this->printTestStartMessage(__FUNCTION__);
+
+        $level = factory(Protolevel::class)->create([
+            'name' => 'beginer',
+            'display_name' => 'Beginer'
+        ]);
+
+        $this->assertEquals($level->name, 'beginer');
+        $this->assertEquals($level->display_name, 'Beginer');
+    }
 
     /**
      * 與Languages建立多對多關聯.
@@ -58,6 +77,7 @@ class ProtolevelTest extends TestCase
 
         $this->assertEquals($language->protolevels->first()->name, 'beginer');
         $this->assertEquals($level->protolanguages->first()->name, 'php');
+        $this->assertTrue($level->hasProtolanguage($language));
     }
 
     /**
@@ -82,5 +102,6 @@ class ProtolevelTest extends TestCase
 
         $level->addProtomission($mission);
         $this->assertEquals($mission->fresh()->protolevel->name, 'beginer');
+        $this->assertTrue($level->hasProtomission($mission));
     }
 }

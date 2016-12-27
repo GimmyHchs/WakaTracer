@@ -2,7 +2,7 @@
 
 namespace App\Languages;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\LanguageEloquent as Model;
 use App\User;
 
 class Language extends Model
@@ -14,8 +14,10 @@ class Language extends Model
     protected $fillable = [
        'name',
        'user_id',
-       'display_name'
+       'display_name',
+       'description',
     ];
+
     /*------------------------------------------------------------------------**
     ** Relation定義
     **------------------------------------------------------------------------*/
@@ -27,5 +29,14 @@ class Language extends Model
     public function levels()
     {
       return $this->hasMany(Level::class);
+    }
+
+    /*------------------------------------------------------------------------**
+    ** Functions
+    **------------------------------------------------------------------------*/
+
+    public function addLevel(Level $level)
+    {
+        return $this->levels()->save($level);
     }
 }
