@@ -2,7 +2,7 @@
 
 namespace App\Languages;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\LanguageEloquent as Model;
 
 class Mission extends Model
 {

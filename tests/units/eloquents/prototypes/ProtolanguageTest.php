@@ -77,6 +77,7 @@ class ProtolanguageTest extends TestCase
 
         $this->assertEquals($language->protolevels->first()->name, 'beginer');
         $this->assertEquals($level->protolanguages->first()->name, 'php');
+        $this->assertTrue($language->hasProtolevel($level));
     }
 
     /**
@@ -103,5 +104,6 @@ class ProtolanguageTest extends TestCase
 
         $this->assertEquals($language->protomissions->first()->name, 'hello_world');
         $this->assertEquals($mission->protolanguages->first()->name, 'php');
+        $this->assertTrue($language->hasProtomission($mission));
     }
 }
