@@ -28,4 +28,12 @@ class Level extends Model
     {
       return $this->hasMany(Mission::class);
     }
+
+    /*------------------------------------------------------------------------**
+    ** Functions
+    **------------------------------------------------------------------------*/
+    public function addMission(Mission $mission)
+    {
+        return $this->missions()->save($mission);
+    }
 }

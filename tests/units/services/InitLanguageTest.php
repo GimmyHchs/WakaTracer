@@ -77,7 +77,7 @@ class InitLanguageTest extends TestCase
     }
 
     /**
-     * 初始化一個Protolanguage.
+     * 初始化一個Protolevel.
      * 並在尚未初始化Protolanguage時，丟出Exception
      *
      * @group unit
@@ -104,7 +104,7 @@ class InitLanguageTest extends TestCase
     }
 
     /**
-     * 初始化一個Protolanguage.
+     * 初始化一個Protolevel.
      * 並在Protolanguage與Protolevel無關時，丟出Exception
      *
      * @group unit
@@ -130,7 +130,7 @@ class InitLanguageTest extends TestCase
     }
 
     /**
-     * 初始化一個Protolanguage.
+     * 初始化一個Protolevel.
      *
      * @group unit
      * @group language
@@ -154,7 +154,65 @@ class InitLanguageTest extends TestCase
     }
 
     /**
-     * 完整初始化一個Protolanguage.
+     * 初始化一個Protomission.
+     * 並在Protolanguage與Protomission無關時，丟出Exception
+     *
+     * @group unit
+     * @group language
+     * @group service
+     */
+    public function testCanInitMissionWithException()
+    {
+        $this->printTestStartMessage(__FUNCTION__);
+        $user = factory(User::class)->create();
+        $proto_level = factory(Protolevel::class)->create();
+        $proto_mission = factory(Protomission::class)->create();
+        $proto_level->addProtomission($proto_mission);
+        $proto_language = factory(Protolanguage::class)->create();
+
+        $service = new InitLanguages();
+        $service->setUser($user)->initLanguage($proto_language);
+        try {
+            $service->initMission($proto_mission, $proto_language);
+        } catch (InitialException $e) {
+            $this->assertContains("doesn't has", $e->getMessage());
+            $this->assertEquals($e->getFile(), "App\Languages\Initialization\InitLanguages");
+            return;
+        }
+    }
+
+    /**
+     * 初始化一個Protomission.
+     *
+     * @group unit
+     * @group language
+     * @group service
+     */
+    public function testCanInitMission()
+    {
+        $this->printTestStartMessage(__FUNCTION__);
+        $user = factory(User::class)->create();
+        $proto_level = factory(Protolevel::class)->create();
+        $proto_mission = factory(Protomission::class)->create();
+        $proto_level->addProtomission($proto_mission);
+        $proto_language = factory(Protolanguage::class)->create();
+        $proto_language->attachProtomission($proto_mission);
+        $proto_language->attachProtolevel($proto_level);
+
+        $service = new InitLanguages();
+        $service->setUser($user)->initLanguage($proto_language);
+        $service->initMission($proto_mission, $proto_language);
+
+        $user = $user->fresh();
+        $this->assertEquals($user->languages()->first()->name, $proto_language->name);
+        $level = $user->levels->first();
+        $this->assertEquals($level->name, $proto_level->name);
+        $mission = $level->missions->first();
+        $this->assertEquals($mission->name, $proto_mission->name);
+    }
+
+    /**
+     * 完整初始化一個Protolanguage下的所有關聯.
      *
      * @group unit
      * @group language
@@ -179,7 +237,7 @@ class InitLanguageTest extends TestCase
         $this->assertEquals($user->languages()->first()->name, $proto_language->name);
         $language = $user->languages()->first();
         $this->assertEquals($language->levels->first()->name, $proto_level->name);
-        $this->assertEquals($language->levels->first()->mission->name, $proto_mission->name);
+        $this->assertEquals($language->levels->first()->missions->first()->name, $proto_mission->name);
 
     }
 

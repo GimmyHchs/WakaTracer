@@ -44,9 +44,10 @@ class InitLanguages
     {
         $this->userCheck(__LINE__);
         $this->initLanguage($proto_language);
-        // 以下沒做完
         foreach ($proto_language->protolevels as $proto_level) {
-            $this->initLevel($proto_level, $proto_language);
+            foreach ($proto_level->protomissions as  $proto_mission) {
+                $this->initMission($proto_mission, $proto_language);
+            }
         }
     }
 
@@ -78,7 +79,7 @@ class InitLanguages
     {
         $this->userCheck(__LINE__);
 
-        // 如果此Level對應到的Language沒被實體畫出來，丟出Exception
+        // 如果此Level對應到的Language沒被實體化出來，丟出Exception
         if(!$this->checkLanguage($proto_language))
         {
             throw new InitialException(
@@ -106,6 +107,40 @@ class InitLanguages
             'description' => $proto_level->description,
         ]);
         $language->addLevel($level);
+        $this->user->addLevel($level);
+
+        return $level->fresh();
+    }
+
+    /**
+     * 實體化一個Protomission
+     */
+    public function initMission(Protomission $proto_mission, Protolanguage $proto_language)
+    {
+        $this->userCheck(__LINE__);
+
+        // 如果此Protolanguage並沒有與$proto_mission關聯，丟出Exception
+        if(!$proto_language->hasProtomission($proto_mission))
+        {
+            throw new InitialException(
+                "Language '".$proto_language->name."'"." doesn't has '".$proto_mission->name."'",
+                InitLanguages::class,
+                __LINE__
+            );
+        }
+
+        // 預先實體化level
+        $proto_level = $proto_mission->protolevel;
+        $level = $this->initLevel($proto_level, $proto_language);
+
+        // 實體化mission
+        $mission = Mission::firstOrCreate([
+            'name' => $proto_mission->name,
+            'display_name' => $proto_mission->display_name,
+            'description' => $proto_mission->description,
+        ]);
+        $level->addMission($mission);
+        $this->user->addMission($mission);
     }
     /*------------------------------------------------------------------------**
     ** Private function
