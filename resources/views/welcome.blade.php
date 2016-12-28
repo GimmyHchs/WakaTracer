@@ -92,4 +92,9 @@
             </div>
         </div>
     </body>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script type="text/javascript">
+        var socket = io('http://localhost:8890');
+        console.log('connect port 8890');
+    </script>
 </html>
