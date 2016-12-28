@@ -3,6 +3,7 @@
 namespace App\Languages\Prototypes;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Protolanguage extends Model
 {
@@ -30,7 +31,10 @@ class Protolanguage extends Model
         return $this->belongsToMany(Protomission::class)->withTimestamps();
     }
 
-
+    public function language(User $user)
+    {
+        return $user->languages()->where('name', $this->name)->first();
+    }
     /*------------------------------------------------------------------------**
     ** Method 定義                                                            **
     **------------------------------------------------------------------------*/
@@ -38,9 +42,17 @@ class Protolanguage extends Model
     {
         return $this->protolevels()->attach($level);
     }
+    public function hasProtolevel(Protolevel $level)
+    {
+        return $this->protolevels->contains($level);
+    }
     public function attachProtomission(Protomission $mission)
     {
         return $this->protomissions()->attach($mission);
+    }
+    public function hasProtomission(Protomission $mission)
+    {
+        return $this->protomissions->contains($mission);
     }
 
 }
