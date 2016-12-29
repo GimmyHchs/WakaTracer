@@ -2,6 +2,8 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
+//Semantic
+require('./semantic/gulpfile.js');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -14,6 +16,8 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
+  mix.styles('/../../../semantic-ui/dist/semantic.min.css','public/css/semantic.min.css');
+  mix.webpack('/../../../semantic-ui/dist/semantic.min.js','public/css/semantic.min.js');
     mix.sass('app.scss')
        .webpack('app.js');
 });
