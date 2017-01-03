@@ -3,7 +3,7 @@
 namespace App\Languages\Prototypes;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Account\User;
 
 class Protolanguage extends Model
 {

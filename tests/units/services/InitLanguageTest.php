@@ -5,7 +5,7 @@ namespace Tests\units\services;
 use Tests\TestCase;
 use App\Languages\Initialization\InitLanguages;
 use App\Languages\Initialization\InitialException;
-use App\User;
+use App\Account\User;
 use App\Languages\Language;
 use App\Languages\Level;
 use App\Languages\Mission;

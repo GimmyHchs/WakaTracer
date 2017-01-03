@@ -2,7 +2,7 @@
 
 namespace App\Languages\Initialization;
 
-use App\User;
+use App\Account\User;
 use App\Languages\Language;
 use App\Languages\Mission;
 use App\Languages\Level;

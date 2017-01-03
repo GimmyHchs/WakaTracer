@@ -3,7 +3,7 @@
 namespace App\Languages;
 
 use App\Core\LanguageEloquent as Model;
-use App\User;
+use App\Account\User;
 
 class Language extends Model
 {
