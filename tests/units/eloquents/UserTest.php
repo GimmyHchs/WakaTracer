@@ -26,12 +26,9 @@ class UserTest extends TestCase
     {
         $this->printTestStartMessage(__FUNCTION__);
 
-        $user = factory('App\Account\User')->create();
+        $user = factory(User::class)->create();
 
         $this->assertNotNull($user->name);
         $this->assertNotNull($user->email);
-
     }
-
-
 }
