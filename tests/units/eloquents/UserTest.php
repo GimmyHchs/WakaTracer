@@ -6,7 +6,7 @@ use Tests\TestCase;
 use App\Languages\Language;
 use App\Languages\Level;
 use App\Languages\Mission;
-use App\User;
+use App\Account\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -26,7 +26,7 @@ class UserTest extends TestCase
     {
         $this->printTestStartMessage(__FUNCTION__);
 
-        $user = factory(User::class)->create();
+        $user = factory('App\Account\User')->create();
 
         $this->assertNotNull($user->name);
         $this->assertNotNull($user->email);

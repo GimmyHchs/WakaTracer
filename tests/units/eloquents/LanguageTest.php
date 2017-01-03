@@ -3,7 +3,7 @@
 namespace Tests\units\eloquents;
 
 use Tests\TestCase;
-use App\User;
+use App\Account\User;
 use App\Languages\Language;
 use App\Languages\Level;
 use App\Languages\Mission;
@@ -45,7 +45,7 @@ class LanguageTest extends TestCase
     public function testCanRelationUser()
     {
         $this->printTestStartMessage(__FUNCTION__);
-        $user = factory(User::class)->create(['name' => 'user']);
+        $user = factory('App\Account\User')->create(['name' => 'user']);
         $language = Language::create([
             'name' => 'php',
             'display_name' => 'PHP'
