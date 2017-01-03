@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// login Tests
+Route::get('login', function () {
+    return view('auth.login');
+});

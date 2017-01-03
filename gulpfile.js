@@ -16,8 +16,9 @@ require('./semantic/gulpfile.js');
  */
 
 elixir((mix) => {
-  mix.styles('/../../../semantic-ui/dist/semantic.min.css','public/css/semantic.min.css');
-  mix.webpack('/../../../semantic-ui/dist/semantic.min.js','public/css/semantic.min.js');
+  mix.styles('/../../../semantic/dist/semantic.min.css','public/css/semantic.min.css');
+  mix.webpack('/../../../semantic/dist/semantic.min.js','public/js/semantic.min.js');
     mix.sass('app.scss')
        .webpack('app.js');
+    mix.sass('login.scss','public/css/login.css');
 });
