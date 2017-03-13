@@ -16,5 +16,9 @@ class ProtolanguageTableSeeder extends Seeder
             'name' => 'php',
             'display_name' => 'PHP'
         ]);
+        Protolanguage::create([
+            'name' => 'vue',
+            'display_name' => 'Vue'
+        ]);
     }
 }
